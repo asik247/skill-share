@@ -5,9 +5,12 @@ import useMyHook from '../Hooks/useMyHook';
 const Registation = () => {
     // handler Registation;
     const [nameValue,handleNameChange] = useMyHook('');
+    const [photoValue,handlePhotoChange] = useMyHook('');
+    const [emailValue,handleEmailChange] = useMyHook('');
+    const [passwordValue,handlePasswordChange] = useMyHook('');
     const handleRegistation = (e)=>{
         e.preventDefault();
-        console.log(nameValue);
+        console.log(nameValue,photoValue,emailValue,passwordValue);
        
     }
     return (
@@ -45,6 +48,8 @@ const Registation = () => {
                         <input
                             type="text"
                             placeholder="Enter your photo URL"
+                            value={photoValue}
+                            onChange={handlePhotoChange}
                             className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
@@ -57,6 +62,8 @@ const Registation = () => {
                         <input
                             type="email"
                             placeholder="Enter your email"
+                            value={emailValue}
+                            onChange={handleEmailChange}
                             className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
@@ -69,6 +76,8 @@ const Registation = () => {
                         <input
                             type="password"
                             placeholder="Enter your password"
+                            value={passwordValue}
+                            onChange={handlePasswordChange}
                             className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
