@@ -29,7 +29,7 @@ const Navbar = () => {
             </div>
             <div className="navbar-end">
                
-                <NavLink to={'/login'} className={'btn btn-accent'}>LogIn</NavLink>
+                <NavLink to={'/auth/login'} className={'btn btn-accent'}>LogIn</NavLink>
             </div>
         </div>
     );
