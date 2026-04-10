@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router';
 import useMyHook from '../Hooks/useMyHook';
+import { AuthContext } from '../Context/AuthContext.';
 
 const Registation = () => {
+    const {registationUser} = useContext(AuthContext)
+   
     // handler Registation;
     const [nameValue,handleNameChange] = useMyHook('');
     const [photoValue,handlePhotoChange] = useMyHook('');
@@ -11,6 +14,12 @@ const Registation = () => {
     const handleRegistation = (e)=>{
         e.preventDefault();
         console.log(nameValue,photoValue,emailValue,passwordValue);
+        registationUser(emailValue,passwordValue)
+        .then(res=>{
+            console.log(res.user);
+        }).catch(error=>{
+            console.log(error.message);
+        })
        
     }
     return (
