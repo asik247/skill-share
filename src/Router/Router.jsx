@@ -21,7 +21,7 @@ const router = createBrowserRouter([
         path:'auth',
         Component:AuthLayouts,
         children:[
-            {path:'login',Component:LogIn},
+            {index:true,Component:LogIn},
             {path:'registation',Component:Registation}
         ]
     }
