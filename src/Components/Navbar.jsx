@@ -1,12 +1,34 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import logoImg from "/logo.png"
 import { NavLink } from 'react-router';
+import { AuthContext } from '../Context/AuthContext.';
 const Navbar = () => {
-    const links =<>
+    // Current User receive provider;
+    const { user, loading, logOutUser } = useContext(AuthContext);
+    console.log('current User', user);
+    if (loading) {
+        return <p>Loadding...</p>
+    }
+    // sign out code here;
+    const signOutHandler = () => {
+        logOutUser()
+            .then(() => {
+                alert("signOut done");
+            }).catch(error => {
+                console.log(error);
+            })
+    }
+    const links = <>
         <li><NavLink to={'/'}>Home</NavLink></li>
-        <li><NavLink to={'/profile'}>Profile</NavLink></li>
         <li><NavLink to={'/contact'}>Contact</NavLink></li>
+        {user && <>
+            <li><NavLink to={'/orders'}>Orders</NavLink></li>
+            <li><NavLink to={'/profile'}>Profile</NavLink></li>
+        </>
+        }
     </>
+
+
     return (
         <div className="navbar bg-base-100 shadow-sm ">
             <div className="navbar-start">
@@ -17,19 +39,34 @@ const Navbar = () => {
                     <ul
                         tabIndex="-1"
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                       {links}
+                        {links}
                     </ul>
                 </div>
                 <img className='scale-200 w-[120px] ml-5' src={logoImg} alt="" />
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
-                     {links}
+                    {links}
                 </ul>
             </div>
+          
+
             <div className="navbar-end">
-               
-                <NavLink to={'/auth'} className={'btn btn-accent'}>LogIn</NavLink>
+                {user ? (
+                    <button
+                        onClick={signOutHandler}
+                        className="px-5 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white font-medium transition"
+                    >
+                        Logout
+                    </button>
+                ) : (
+                    <NavLink
+                        to="/auth"
+                        className="px-5 py-2 rounded-lg bg-blue-500 hover:bg-blue-600 text-white font-medium transition"
+                    >
+                        Login
+                    </NavLink>
+                )}
             </div>
         </div>
     );
