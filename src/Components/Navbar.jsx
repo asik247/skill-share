@@ -3,10 +3,11 @@ import logoImg from "/logo.png"
 import { NavLink } from 'react-router';
 
 import { AuthContext } from '../Context/AuthContext.';
+import { FaUser } from 'react-icons/fa';
 const Navbar = () => {
     // Current User receive provider;
     const { user, loading, logOutUser } = useContext(AuthContext);
-    // console.log('current User', user);
+    console.log('current User', user);
     if (loading) {
         return <p>Loadding...</p>
     }
@@ -51,9 +52,30 @@ const Navbar = () => {
                     {links}
                 </ul>
             </div>
-          
+
 
             <div className="navbar-end">
+                {/* User Profile Image */}
+                <div className="mr-10">
+                    {user?.photoURL ? (
+                        <div className="relative group">
+                            <img
+                                src={user.photoURL}
+                                alt="User Profile"
+                                className="w-10 h-10 rounded-full object-cover border-2 border-white shadow-md 
+                   hover:scale-110 transition-transform duration-300 cursor-pointer"
+                            />
+                            {/* Optional subtle ring effect on hover */}
+                            <div className="absolute inset-0 rounded-full border-2 border-blue-500 opacity-0 
+                      group-hover:opacity-30 transition-opacity duration-300"></div>
+                        </div>
+                    ) : (
+                        <div className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 
+                    border-2 border-gray-300 shadow-sm">
+                            <FaUser className="text-2xl text-gray-500" />
+                        </div>
+                    )}
+                </div>
                 {user ? (
                     <button
                         onClick={signOutHandler}

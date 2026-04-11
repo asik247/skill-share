@@ -17,7 +17,7 @@ const LogIn = () => {
     // navgate and location code here;
     const navgate = useNavigate();
     const location = useLocation();
-    console.log(location);
+    // console.log(location);
     // Error and success message;
     const [success, setSuccess] = useState('');
     const [error, setError] = useState(null);
