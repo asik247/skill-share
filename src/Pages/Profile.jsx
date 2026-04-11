@@ -1,9 +1,26 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext.";
+// import { useNavigate } from "react-router";
+
 
 const Profile = () => {
     // AuthProvider receive user and loading and logIn;
-    const {user} = useContext(AuthContext);
+    const {user,logOutUser,loading} = useContext(AuthContext);
+   
+    if(loading){
+        return <p>Loading...</p>
+    }
+    // const navigate = useNavigate();
+    // logOut handler code here;
+    const handlerLogOut = ()=>{
+        logOutUser()
+        .then(()=>{
+            alert('logOut done')
+            // navigate("/")
+        }).catch(error=>{
+            console.log(error);
+        })
+    }
     return (
         <div className="min-h-screen bg-base-200 flex items-center justify-center p-4">
             <div className="bg-white shadow-xl rounded-2xl p-6 w-full max-w-md text-center">
@@ -31,8 +48,8 @@ const Profile = () => {
                 {/* Buttons */}
                 <div className="mt-6 flex gap-3 justify-center">
                     <button className="btn btn-primary px-4">Edit Profile</button>
-                    <button className="btn btn-outline px-4">Logout</button>
-                    <button className="btn btn-outline px-4">Logout</button>
+                    <button onClick={handlerLogOut} className="btn btn-outline px-4">Logout</button>
+                    
                 </div>
             </div>
         </div>
