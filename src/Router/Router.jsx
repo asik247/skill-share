@@ -14,7 +14,9 @@ const router = createBrowserRouter([
         path:'/',
         Component:Roots,
         children:[
-            {index:true,Component:Home},
+            {index:true,
+            loader:()=>fetch("/courseCard.json"),
+            Component:Home},
             {path:'contact',Component:Contact},
             {path:'profile',element:<PrivateRoutes><Profile></Profile></PrivateRoutes>},
             {path:'orders',element:<PrivateRoutes><Orders></Orders></PrivateRoutes>},
