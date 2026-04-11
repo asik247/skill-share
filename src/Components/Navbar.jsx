@@ -6,7 +6,7 @@ import { AuthContext } from '../Context/AuthContext.';
 const Navbar = () => {
     // Current User receive provider;
     const { user, loading, logOutUser } = useContext(AuthContext);
-    console.log('current User', user);
+    // console.log('current User', user);
     if (loading) {
         return <p>Loadding...</p>
     }
