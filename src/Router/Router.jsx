@@ -6,14 +6,19 @@ import Profile from "../Pages/Profile";
 import Contact from "../Pages/Contact";
 import AuthLayouts from "../Layouts/AuthLayouts";
 import Registation from "../Components/Registation";
+import PrivateRoutes from "./PrivateRoutes";
+import Orders from "../Pages/Orders";
+import DashBoard from "../Pages/DashBoard";
 const router = createBrowserRouter([
     {
         path:'/',
         Component:Roots,
         children:[
             {index:true,Component:Home},
-            {path:'profile',Component:Profile},
             {path:'contact',Component:Contact},
+            {path:'profile',element:<PrivateRoutes><Profile></Profile></PrivateRoutes>},
+            {path:'orders',element:<PrivateRoutes><Orders></Orders></PrivateRoutes>},
+            {path:'dashboard',element:<PrivateRoutes><DashBoard></DashBoard></PrivateRoutes>},
             
         ]
     },

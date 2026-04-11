@@ -1,5 +1,5 @@
 
-import { NavLink } from 'react-router';
+import { NavLink, useLocation, useNavigate } from 'react-router';
 import useMyHook from '../Hooks/useMyHook';
 import { AuthContext } from '../Context/AuthContext.';
 import { useContext, useRef, useState } from 'react';
@@ -10,10 +10,14 @@ import { auth } from '../firebase/firebase.init';
 
 const LogIn = () => {
     // AuthContext receive loginUser;
-    const { loginUser,googleSignIn } = useContext(AuthContext);
+    const { loginUser, googleSignIn } = useContext(AuthContext);
     const [emailValue, handleEmailChange] = useMyHook('');
     const [passwordValue, handlePasswordChange] = useMyHook('');
     const emailRef = useRef(null);
+    // navgate and location code here;
+    const navgate = useNavigate();
+    const location = useLocation();
+    console.log(location);
     // Error and success message;
     const [success, setSuccess] = useState('');
     const [error, setError] = useState(null);
@@ -41,6 +45,8 @@ const LogIn = () => {
             .then(res => {
                 console.log(res.user);
                 setSuccess(res.user)
+                // pathName match code;
+                navgate(location.state || '/')
                 if (!res.user.emailVerified) {
                     alert('tomer email verify kora nai')
                 }
@@ -68,16 +74,17 @@ const LogIn = () => {
             })
     }
     // Google SingIn
-    const googleSignInHandler = (e)=>{
+    const googleSignInHandler = (e) => {
         e.preventDefault();
         googleSignIn()
-        .then(res=>{
-            console.log(res.user);
-            setSuccess(res.user)
-        }).catch(error=>{
-            console.log(error.message);
-            setError(error.message)
-        })
+            .then(res => {
+                console.log(res.user);
+                setSuccess(res.user)
+                navgate(location.state || '/')
+            }).catch(error => {
+                console.log(error.message);
+                setError(error.message)
+            })
     }
     return (
         <div className="min-h-screen flex items-center justify-center px-4">
