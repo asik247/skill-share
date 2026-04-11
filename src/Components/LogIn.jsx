@@ -52,6 +52,10 @@ const LogIn = () => {
         setEye(!eye)
 
     }
+    // forgotPasswordHandler code
+    const forgotPasswordHandler = ()=>{
+        console.log('forgotPassword clicked');
+    }
     return (
         <div className="min-h-screen flex items-center justify-center px-4">
 
@@ -104,7 +108,7 @@ const LogIn = () => {
                     </div>
 
                     {/* FORGOT */}
-                    <div className="text-right">
+                    <div onClick={forgotPasswordHandler} className="text-right">
                         <a className="text-sm text-blue-500 hover:underline cursor-pointer">
                             Forgot password?
                         </a>
