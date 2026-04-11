@@ -11,8 +11,8 @@ const CourseCards = ({ courseCard }) => {
   } = courseCard;
 
   return (
-    <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition duration-300">
-      
+    <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition duration-300 p-10 border-2 border-red-400">
+       
       {/* Image */}
       <figure>
         <img

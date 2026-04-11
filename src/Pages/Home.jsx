@@ -13,9 +13,10 @@ const Home = () => {
         <div className='mb-20'>
             <HeroArea></HeroArea>
         </div>
-        <div className='grid grid-cols-3 gap-5'>
+        <div className='grid md:grid-cols-3 gap-5 border-4 border-green-600'>
            
-            {courseCards.map(courseCard=><CourseCards key={courseCard.skillId} courseCard={courseCard}></CourseCards>)}
+           
+            {courseCards.slice(0,6).map(courseCard=><CourseCards key={courseCard.skillId} courseCard={courseCard}></CourseCards>)}
         </div>
       </div>
     );
