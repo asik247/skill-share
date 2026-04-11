@@ -1,26 +1,77 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { NavLink } from 'react-router';
+import { sendEmailVerification, updateProfile } from "firebase/auth";
 import useMyHook from '../Hooks/useMyHook';
 import { AuthContext } from '../Context/AuthContext.';
+import { FaEye } from 'react-icons/fa';
+import { IoEyeOff } from 'react-icons/io5';
+
 
 const Registation = () => {
-    const {registationUser} = useContext(AuthContext)
-   
-    // handler Registation;
-    const [nameValue,handleNameChange] = useMyHook('');
-    const [photoValue,handlePhotoChange] = useMyHook('');
-    const [emailValue,handleEmailChange] = useMyHook('');
-    const [passwordValue,handlePasswordChange] = useMyHook('');
-    const handleRegistation = (e)=>{
+    // AuthContext receive registation;
+    const { registationUser } = useContext(AuthContext)
+    // All Current values;
+    const [nameValue, handleNameChange] = useMyHook('');
+    const [photoValue, handlePhotoChange] = useMyHook('');
+    const [emailValue, handleEmailChange] = useMyHook('');
+    const [passwordValue, handlePasswordChange] = useMyHook('');
+    // Error and success message;
+    const [success, setSuccess] = useState('');
+    const [error, setError] = useState(null);
+    const [eye, setEye] = useState(false);
+    // submit registation;
+    const handleRegistation = (e) => {
         e.preventDefault();
-        console.log(nameValue,photoValue,emailValue,passwordValue);
-        registationUser(emailValue,passwordValue)
-        .then(res=>{
-            console.log(res.user);
-        }).catch(error=>{
-            console.log(error.message);
-        })
-       
+        // Reset code;
+        setSuccess('');
+        setError(null);
+        // Validation code;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/;
+        // condition;
+        if (!emailRegex.test(emailValue)) {
+            alert("Invalid Email ❌");
+            return;
+        }
+        if (!passwordRegex.test(passwordValue)) {
+            alert("Password must be strong ❌");
+            return;
+        }
+        // Terms code;
+        const terms = e.target.terms.checked;
+        if (!terms) {
+            return alert("please accept terms")
+        }
+        // main registation;
+        registationUser(emailValue, passwordValue)
+            .then(res => {
+                console.log(res.user);
+                setSuccess(res.user)
+                // verification send your email address;
+                sendEmailVerification(res.user)
+                    .then(() => {
+                        alert("Checked your email then login")
+                    }).catch(error => {
+                        console.log(error);
+                    })
+                // update display name and photourl;
+                const updateUser = {
+                    displayName: nameValue,
+                    photoURL: photoValue
+
+                }
+                updateProfile(res.user, updateUser)
+            }).catch(error => {
+                console.log(error.message);
+                setError(error.message);
+            })
+
+    }
+    // Eye showing handler here;
+    const eyeShowHandler = (e) => {
+        e.preventDefault();
+        setEye(!eye)
+
     }
     return (
         <div className="min-h-screen flex items-center justify-center px-4">
@@ -76,25 +127,55 @@ const Registation = () => {
                             className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
-
-                    {/* PASSWORD */}
-                    <div>
+                    {/* Password */}
+                    <div className="relative">
                         <label className="block text-sm font-medium mb-1">
                             Password
                         </label>
+
                         <input
-                            type="password"
+                            type={eye ? "text" : "password"}
                             placeholder="Enter your password"
                             value={passwordValue}
                             onChange={handlePasswordChange}
-                            className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="w-full border border-gray-300 rounded-lg px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
+
+                        {/* Eye Button */}
+                        <button
+                            type="button"
+                            onClick={eyeShowHandler}
+                            className="absolute top-[38px] right-3 text-gray-500 hover:text-blue-500 transition text-xl"
+                        >
+                            {eye ? <FaEye /> : <IoEyeOff />}
+                        </button>
+                    </div>
+                    {/* Terms code */}
+                    <div>
+                        <label className="label">
+                            <input type="checkbox" name='terms' className="checkbox" />
+                            Accept Terms!
+                        </label>
                     </div>
 
                     {/* BUTTON */}
                     <button className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg font-semibold transition">
                         Register
                     </button>
+                    {/* Show message */}
+                    <div className="flex flex-col items-center justify-center mt-4 space-y-2">
+                        {success && (
+                            <p className="text-green-600 bg-green-100 px-4 py-2 rounded-lg font-semibold text-center shadow-sm">
+                                ✅ Successfully account created
+                            </p>
+                        )}
+
+                        {error && (
+                            <p className="text-red-600 bg-red-100 px-4 py-2 rounded-lg font-semibold text-center shadow-sm">
+                                ❌ {error}
+                            </p>
+                        )}
+                    </div>
 
                     {/* LOGIN LINK */}
                     <p className="text-center text-sm">

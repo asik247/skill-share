@@ -1,7 +1,25 @@
-import React from 'react';
+
 import { NavLink } from 'react-router';
+import useMyHook from '../Hooks/useMyHook';
+import { AuthContext } from '../Context/AuthContext.';
+import { useContext } from 'react';
 
 const LogIn = () => {
+    // AuthContext receive loginUser;
+    const {loginUser} = useContext(AuthContext);
+    const [emailValue, handleEmailChange] = useMyHook('');
+    const [passwordValue, handlePasswordChange] = useMyHook('');
+    // handler login;
+    const loginHandler = (e)=>{
+        e.preventDefault();
+        console.log(emailValue,passwordValue);
+        loginUser(emailValue,passwordValue)
+        .then(res=>{
+            console.log(res.user);
+        }).catch(error=>{
+            console.log(error.message);
+        })
+    }
     return (
         <div className="min-h-screen flex items-center justify-center px-4">
 
@@ -13,7 +31,7 @@ const LogIn = () => {
                 </h1>
 
                 {/* FORM */}
-                <form className="space-y-5">
+                <form onSubmit={loginHandler} className="space-y-5">
 
                     {/* EMAIL */}
                     <div>
@@ -22,6 +40,8 @@ const LogIn = () => {
                         </label>
                         <input
                             type="email"
+                            value={emailValue}
+                            onChange={handleEmailChange}
                             placeholder="Enter your email"
                             className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
@@ -34,6 +54,8 @@ const LogIn = () => {
                         </label>
                         <input
                             type="password"
+                            value={passwordValue}
+                            onChange={handlePasswordChange}
                             placeholder="Enter your password"
                             className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
