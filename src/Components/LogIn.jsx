@@ -2,15 +2,18 @@
 import { NavLink } from 'react-router';
 import useMyHook from '../Hooks/useMyHook';
 import { AuthContext } from '../Context/AuthContext.';
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { FaEye } from 'react-icons/fa';
 import { IoEyeOff } from 'react-icons/io5';
+import { sendPasswordResetEmail } from 'firebase/auth';
+import { auth } from '../firebase/firebase.init';
 
 const LogIn = () => {
     // AuthContext receive loginUser;
     const { loginUser } = useContext(AuthContext);
     const [emailValue, handleEmailChange] = useMyHook('');
     const [passwordValue, handlePasswordChange] = useMyHook('');
+    const emailRef = useRef(null);
     // Error and success message;
     const [success, setSuccess] = useState('');
     const [error, setError] = useState(null);
@@ -38,7 +41,7 @@ const LogIn = () => {
             .then(res => {
                 console.log(res.user);
                 setSuccess(res.user)
-                if(!res.user.emailVerified){
+                if (!res.user.emailVerified) {
                     alert('tomer email verify kora nai')
                 }
             }).catch(error => {
@@ -53,8 +56,16 @@ const LogIn = () => {
 
     }
     // forgotPasswordHandler code
-    const forgotPasswordHandler = ()=>{
-        console.log('forgotPassword clicked');
+    const forgotPasswordHandler = (e) => {
+        e.preventDefault();
+        const emailValue = emailRef.current.value
+        console.log('forgotPassword clicked', emailValue);
+        sendPasswordResetEmail(auth, emailValue)
+            .then(() => {
+                alert('Email Checked and password reset')
+            }).catch(error=>{
+                console.log(error);
+            })
     }
     return (
         <div className="min-h-screen flex items-center justify-center px-4">
@@ -78,6 +89,7 @@ const LogIn = () => {
                             type="email"
                             value={emailValue}
                             onChange={handleEmailChange}
+                            ref={emailRef}
                             placeholder="Enter your email"
                             className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
