@@ -32,6 +32,7 @@ const Profile = () => {
                 <div className="mt-6 flex gap-3 justify-center">
                     <button className="btn btn-primary px-4">Edit Profile</button>
                     <button className="btn btn-outline px-4">Logout</button>
+                    <button className="btn btn-outline px-4">Logout</button>
                 </div>
             </div>
         </div>
