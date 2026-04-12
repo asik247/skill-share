@@ -5,6 +5,7 @@ import CourseCards from './CourseCards';
 import Footer from '../Components/Footer';
 const Home = () => {
   const [data, setData] = useState([]);
+  const [card, setCard] = useState([])
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch("/courseFeture.json");
@@ -17,12 +18,15 @@ const Home = () => {
 
   const courseCards = useLoaderData();
   // console.log(courseCards);
-  const handleProgramming = ()=>{
-    console.log(courseCards);
-  }
+  const handleProgramming = () => {
+    const programmingCards = courseCards.filter(singleCard => singleCard.category === 'Programming')
+    // programmingCards.map(card=>{console.log(card)})
+    setCard(programmingCards)
+  };
+
   return (
     <div>
-      
+
       <div className='mb-20'>
         <HeroArea></HeroArea>
       </div>
@@ -37,13 +41,25 @@ const Home = () => {
       <div>
         <h2 className='text-2xl font-bold text-center p-10'>Inner Pages Demos</h2>
         <div className='flex justify-center items-center gap-5 mb-10'>
-          
+
           <NavLink onClick={handleProgramming}>Programming</NavLink>
           <NavLink>Photography</NavLink>
           <NavLink>Design</NavLink>
-          
+
 
         </div>
+      </div>
+      {/* card show */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {
+          card.map(singleCard => (
+            <div key={singleCard.id} className="card p-4 shadow">
+              <img src={singleCard.image} alt="" />
+              <h2>{singleCard.skillName}</h2>
+              <p>Price: {singleCard.price}</p>
+            </div>
+          ))
+        }
       </div>
       {/* Cursus Features */}
       <div>
