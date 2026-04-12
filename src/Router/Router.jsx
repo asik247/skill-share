@@ -9,6 +9,7 @@ import Registation from "../Components/Registation";
 import PrivateRoutes from "./PrivateRoutes";
 import Orders from "../Pages/Orders";
 import DashBoard from "../Pages/DashBoard";
+import ViewDetails from "../Pages/ViewDetails";
 const router = createBrowserRouter([
     {
         path:'/',
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
             {path:'profile',element:<PrivateRoutes><Profile></Profile></PrivateRoutes>},
             {path:'orders',element:<PrivateRoutes><Orders></Orders></PrivateRoutes>},
             {path:'dashboard',element:<PrivateRoutes><DashBoard></DashBoard></PrivateRoutes>},
+
+            {path:'details/:id',
+            loader:({params})=>fetch("/courseCard.json").then(res=>res.json()).then(data=>data.find(singleData=>singleData.skillId==params.id)),
+            element:<ViewDetails></ViewDetails>}
             
         ]
     },
