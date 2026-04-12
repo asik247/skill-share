@@ -17,6 +17,7 @@ const router = createBrowserRouter([
         children:[
             {index:true,
             loader:()=>fetch("/courseCard.json"),
+            // loader:()=>fetch("/courseCard.json"),
             Component:Home},
             {path:'contact',Component:Contact},
             {path:'profile',element:<PrivateRoutes><Profile></Profile></PrivateRoutes>},
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
 
             {path:'details/:id',
             loader:({params})=>fetch("/courseCard.json").then(res=>res.json()).then(data=>data.find(singleData=>singleData.skillId==params.id)),
-            element:<ViewDetails></ViewDetails>}
+            element:<PrivateRoutes><ViewDetails></ViewDetails></PrivateRoutes>}
             
         ]
     },

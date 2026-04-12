@@ -1,0 +1,23 @@
+[
+  { "id": 1, "name": "HTML", "image": "https://cdn-icons-png.flaticon.com/512/732/732212.png" },
+  { "id": 2, "name": "CSS", "image": "https://cdn-icons-png.flaticon.com/512/732/732190.png" },
+  { "id": 3, "name": "JavaScript", "image": "https://cdn-icons-png.flaticon.com/512/5968/5968292.png" },
+  { "id": 4, "name": "React", "image": "https://cdn-icons-png.flaticon.com/512/1126/1126012.png" },
+  { "id": 5, "name": "Tailwind CSS", "image": "https://cdn-icons-png.flaticon.com/512/5968/5968672.png" },
+  { "id": 6, "name": "Firebase", "image": "https://cdn-icons-png.flaticon.com/512/5968/5968525.png" },
+  { "id": 7, "name": "Node.js", "image": "https://cdn-icons-png.flaticon.com/512/5968/5968322.png" },
+  { "id": 8, "name": "MongoDB", "image": "https://cdn-icons-png.flaticon.com/512/919/919836.png" },
+  { "id": 9, "name": "Express.js", "image": "https://cdn-icons-png.flaticon.com/512/5968/5968705.png" },
+  { "id": 10, "name": "Next.js", "image": "https://cdn-icons-png.flaticon.com/512/919/919851.png" },
+
+  { "id": 11, "name": "TypeScript", "image": "https://cdn-icons-png.flaticon.com/512/5968/5968381.png" },
+  { "id": 12, "name": "Redux", "image": "https://cdn-icons-png.flaticon.com/512/5968/5968875.png" },
+  { "id": 13, "name": "Bootstrap", "image": "https://cdn-icons-png.flaticon.com/512/5968/5968672.png" },
+  { "id": 14, "name": "Git", "image": "https://cdn-icons-png.flaticon.com/512/2111/2111288.png" },
+  { "id": 15, "name": "GitHub", "image": "https://cdn-icons-png.flaticon.com/512/733/733553.png" },
+  { "id": 16, "name": "VS Code", "image": "https://cdn-icons-png.flaticon.com/512/5968/5968520.png" },
+  { "id": 17, "name": "Figma", "image": "https://cdn-icons-png.flaticon.com/512/5968/5968704.png" },
+  { "id": 18, "name": "Photoshop", "image": "https://cdn-icons-png.flaticon.com/512/5968/5968520.png" },
+  { "id": 19, "name": "Python", "image": "https://cdn-icons-png.flaticon.com/512/5968/5968350.png" },
+  { "id": 20, "name": "C++", "image": "https://cdn-icons-png.flaticon.com/512/6132/6132222.png" }
+]
