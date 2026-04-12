@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import HeroArea from './HeroArea';
-import { useLoaderData } from 'react-router';
+import { NavLink, useLoaderData } from 'react-router';
 import CourseCards from './CourseCards';
 import Footer from '../Components/Footer';
 const Home = () => {
@@ -16,9 +16,13 @@ const Home = () => {
   }, []);
 
   const courseCards = useLoaderData();
-  console.log(courseCards);
+  // console.log(courseCards);
+  const handleProgramming = ()=>{
+    console.log(courseCards);
+  }
   return (
     <div>
+      
       <div className='mb-20'>
         <HeroArea></HeroArea>
       </div>
@@ -33,9 +37,11 @@ const Home = () => {
       <div>
         <h2 className='text-2xl font-bold text-center p-10'>Inner Pages Demos</h2>
         <div className='flex justify-center items-center gap-5 mb-10'>
-          <h2>Programming</h2>
-          <h2>Photography</h2>
-          <h2>Design</h2>
+          
+          <NavLink onClick={handleProgramming}>Programming</NavLink>
+          <NavLink>Photography</NavLink>
+          <NavLink>Design</NavLink>
+          
 
         </div>
       </div>
