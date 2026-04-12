@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import HeroArea from './HeroArea';
 import { useLoaderData } from 'react-router';
 import CourseCards from './CourseCards';
+import Footer from '../Components/Footer';
 const Home = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -67,6 +68,10 @@ const Home = () => {
           ))}
 
         </div>
+      </div>
+      {/* Footer */}
+      <div>
+        <Footer></Footer>
       </div>
     </div>
 
