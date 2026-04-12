@@ -43,13 +43,14 @@ const Home = () => {
     <div>
 
       {/* Hero */}
-      <div className='mb-20'>
+      <div>
         <HeroArea />
       </div>
 
       {/* Main Demo */}
+      <div className='bg-gradient-to-r from-blue-100 to-purple-100 p-8'>
       <div>
-        <h2 className='text-center font-bold text-2xl'>
+        <h2 className='text-center font-bold text-2xl mb-7'>
           Cursus Main Demos
         </h2>
       </div>
@@ -63,7 +64,10 @@ const Home = () => {
         ))}
       </div>
 
+      </div>
+
       {/* 🔥 Category Buttons */}
+      <div className='bg-gradient-to-r from-sky-100 to-indigo-200 p-5'>
       <div>
         <h2 className='text-2xl font-bold text-center p-10'>
           Inner Pages Demos
@@ -121,9 +125,10 @@ const Home = () => {
           ))
         }
       </div>
+      </div>
 
       {/* Course Features */}
-      <div className="mt-20">
+      <div className=" bg-gradient-to-r from-cyan-100 to-blue-3000 p-8">
         <h2 className="text-center font-bold text-2xl mb-6">
           Course Features
         </h2>
